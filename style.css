@@ -1,0 +1,494 @@
+/* === Import Fonts === */
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+
+/* === Global Font Variables === */
+:root {
+  --font-body: "Google Sans Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
+               "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Source Code Pro",
+               monospace;
+  --font-navbar: "Ubuntu", sans-serif;
+}
+
+/* Default body font */
+body {
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #000;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header{ position: relative; z-index: 2; }
+
+/* ========== Navigation Bar ========== */
+.navbar {
+  font-family: var(--font-navbar); /* Ubuntu for navbar */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  background: #fff;
+  border-radius: 9999px;           /* pill shape */
+
+  /* deeper shadow */
+  box-shadow:
+    0 28px 60px -28px rgba(0,0,0,.35),
+    0 12px 24px -12px rgba(0,0,0,.20);  /* deep but soft */
+
+  width: 80%;
+  max-width: 1000px;
+  margin: 28px auto;               /* center it and add top/bottom space */
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  line-height: 1;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-family: var(--font-navbar); /* Ubuntu or your chosen font */
+  font-size: 18px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  transition: 0.4s;
+}
+
+.nav-links a:hover {
+  background-color: #f5f5f5; /* soft background */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* soft glow */
+  transform: translateY(-2px); /* slight lift */
+}
+
+/* ========== Intro ========== */
+.intro{
+  min-height: calc(100vh - 400px);   /* adjust 100px to roughly nav height+top gap */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 40px 20px 0;              /* top padding gives breathing room under nav */
+  background: #fff;
+  color: #000;
+}
+
+/* Centered image with smaller size */
+.intro-selfie {
+  width: 720px;                  /* smaller size */
+  height: 720px;
+  object-fit: cover;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+}
+
+/* Greeting text */
+.intro-title {
+  font-size: clamp(28px, 5vw, 56px);
+  font-weight: 800;
+  white-space: nowrap;          /* keep on one line */
+  overflow: hidden;             /* hide text as it types */
+  border-right: .08em solid transparent; /* space for caret line-up */
+}
+
+.intro-title span {
+  border-right: .08em solid currentColor;
+  animation: caret 1s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% { border-color: transparent; }
+}
+
+.intro::before{
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 70px;                         /* only a thin strip */
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.08),
+    rgba(0,0,0,.03) 40%,
+    rgba(0,0,0,0) 100%
+  );
+  pointer-events: none;
+}
+
+/* --- Shared container (makes content wider & centered) --- */
+.container,
+.hero,
+.linked-entry {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ========== Main Section ========== */
+.hero {
+    min-height: calc(100vh - 10px); /* full height minus navbar height */
+    display: flex;
+    flex-direction: column; /* stack text above image */
+    align-items: center; /* center horizontally */
+    justify-content: flex-start; /* start at the top */
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding-top: 40px; /* spacing below navbar */
+}
+
+.hero-content {
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px; /* space between text and image */
+}
+
+.hero-image {
+    width: 250px; /* adjust size */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.hero-text { 
+  max-width: 800px;
+}
+
+.hero-text h1 {
+  font-size: 50px;
+  line-height: 1.2;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+}
+
+.hero-text h1 span {
+    display: inline;
+    margin-right: 8px;
+}
+
+.hero-text p { margin-top: 10px; }
+
+/* Right-side photo */
+.hero-image img {
+  width: 340px;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+/* ===== CURRENT (reveal on hover/click) - Same pattern as other reveal blocks ===== */
+
+.reveal-block.current {
+    --icon: 32px; /* icon size */
+    --gap: 10px; /* space between icon and text */
+    /* Ensure same height as other reveal blocks */
+    height: 150px !important;
+    /* All other properties inherited from .reveal-block - including the black borders */
+}
+
+/* Left-align the heading like other sections */
+.reveal-block.current .block-face {
+    font-weight: 900;
+    text-align: center; /* Keep same as other blocks */
+    letter-spacing: .5px;
+    font-size: clamp(32px, 6vw, 64px);
+    line-height: 1.1;
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+/* Content container - EXACTLY same as .block-content in other sections */
+.reveal-block.current .block-content {
+    max-width: 900px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(10px) scale(.98);
+    padding-left: 10px; /* match .contact-item gap */
+    pointer-events: none; /* Add this important property */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Add explicit transition */
+}
+
+/* Icon size */
+.reveal-block.current .current-icon {
+    width: var(--icon);
+    height: var(--icon);
+    object-fit: contain;
+}
+
+/* First row (location) */
+.reveal-block.current .current-location {
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+    margin-bottom: 18px;
+}
+
+/* Second row (CS + Math) */
+.reveal-block.current .current-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 18px; /* Same spacing as other items */
+}
+
+/* Individual items in the CS + Math row */
+.reveal-block.current .current-item {
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+}
+
+/* Text style */
+.reveal-block.current .current-item span,
+.reveal-block.current .current-location span {
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+/* ---- EXACT same open states as other reveal blocks ---- */
+.reveal-block.current:hover,
+.reveal-block.current:focus-within,
+.reveal-block.current.is-open {
+    height: auto; /* expand to fit content */
+    padding: 32px 24px; /* add breathing room when open */
+}
+
+.reveal-block.current:hover .block-face,
+.reveal-block.current:focus-within .block-face,
+.reveal-block.current.is-open .block-face {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+.reveal-block.current:hover .block-content,
+.reveal-block.current:focus-within .block-content,
+.reveal-block.current.is-open .block-content {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+
+/* ====== ABOUT ME reveal block (collapsed by default) ====== */
+.reveal-block{
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  max-width: 1100px;
+  margin: 48px auto;
+  padding: 0 24px;              /* no big padding when collapsed */
+  cursor: pointer;
+  position: relative;
+  background: #fff;
+
+  /* collapsed state */
+  height: 150px;                /* << default smaller height */
+  display: flex;
+  align-items: center;          /* center "ABOUT ME" vertically */
+  justify-content: center;
+  overflow: hidden;             /* hide content until opened */
+  transition: height .35s ease, padding .25s ease;
+}
+
+/* Title shown initially */
+.reveal-block .block-face{
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: .5px;
+  font-size: clamp(32px, 6vw, 64px);
+  line-height: 1.1;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+/* Hidden content (will pop in) */
+.reveal-block .block-content{
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(10px) scale(.98);
+
+  margin: 0 auto;
+  padding-left: 10px; /* match .contact-item gap */
+}
+
+.school-icon {
+  width: 50px;      /* or adjust to your preferred size */
+  height: 50px;
+  object-fit: contain; /* keeps aspect ratio */
+}
+
+.school-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;       /* space between icon and text */
+  white-space: nowrap; /* prevent text from breaking to the next line */
+}
+
+.school-name {
+  font-size: 16px;
+  color: #000;
+  line-height: 1.2; /* make vertical alignment look cleaner */
+}
+
+
+/* ---- Open states (hover, keyboard focus, or .is-open) ---- */
+.reveal-block:hover,
+.reveal-block:focus-within,
+.reveal-block.is-open{
+  height: auto;                 /* expand to fit content */
+  padding: 32px 24px;           /* add breathing room when open */
+}
+
+.reveal-block:hover .block-face,
+.reveal-block:focus-within .block-face,
+.reveal-block.is-open .block-face{
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.reveal-block:hover .block-content,
+.reveal-block:focus-within .block-content,
+.reveal-block.is-open .block-content{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Nice spacing for items inside the content */
+.reveal-block .school-entry{ margin-top: 18px; }
+.reveal-block p{ margin: 16px 0 8px; font-size: 1.125rem; }
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce){
+  .reveal-block,
+  .reveal-block .block-face,
+  .reveal-block .block-content{
+    transition: none;
+  }
+}
+
+/* Gmail Layout */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.contact-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* General contact item styling */
+.contact-item a,
+.contact-item span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  padding: 4px 8px; /* space for box */
+  border: 2px solid transparent; /* invisible box initially */
+  transition: all 0.3s ease;
+}
+
+/* LinkedIn styles */
+.contact-linkedin {
+  color: #0077b5; /* LinkedIn blue */
+}
+
+.contact-linkedin:hover {
+  border-color: #0077b5;
+  color: #0077b5;
+}
+
+/* GitHub styles */
+.contact-github {
+  color: #000; /* Black */
+}
+
+.contact-github:hover {
+  border-color: #000;
+  color: #000;
+}
+
+/* Gmail styles */
+.contact-gmail {
+  color: #d93025; /* Gmail red */
+}
+
+.contact-gmail:hover {
+  border-color: #d93025;
+  color: #d93025;
+}
+
+/* ========== Responsive tweaks ========== */
+@media (max-width: 900px) {
+  .hero { gap: 32px; padding: 40px 24px; }
+  .hero-image img { width: 300px; }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: left;
+    gap: 24px;
+    padding: 36px 20px;
+  }
+  .hero-text h1 { font-size: 38px; }
+  .hero-image img { width: 240px; }
+  .linked-entry { padding: 6px 20px; }
+}
+
+/* ========== Footer ========== */
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.attributions p {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+}
+
+.attributions a {
+    color: #666;
+    text-decoration: none;
+}
+
+.attributions a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+</head>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const dataText = ["Hi, this is Tim's Tab."];
+    const el = document.querySelector('.intro-title');
+    const typeSpeed = 100;
+    const pauseAfter = 900;
+    let hasLeftSection = true; // Start as true so first view triggers animation
+
+    function typeWriter(text, i, fnCallback) {
+        if (i < text.length) {
+            el.innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
+            setTimeout(function () { typeWriter(text, i + 1, fnCallback); }, typeSpeed);
+        } else if (typeof fnCallback === 'function') {
+            setTimeout(fnCallback, pauseAfter);
+        }
+    }
+
+    function startTextAnimation() {
+        if (!hasLeftSection) return; // Only animate if we've left and come back
+        
+        hasLeftSection = false; // Mark that we're now in the section
+        el.textContent = '';
+        typeWriter(dataText[0], 0);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Delay slightly to ensure smooth triggering
+                setTimeout(() => startTextAnimation(), 50);
+            } else {
+                // Mark that we've left the section
+                hasLeftSection = true;
+            }
+        });
+    }, { threshold: 0.5 }); // Lower threshold for more reliable triggering
+    
+    observer.observe(document.querySelector('.intro'));
+});
+</script>
+
+<script>
+  // Toggle open on tap/click
+  document.addEventListener('click', (e) => {
+    const block = e.target.closest('.reveal-block');
+    if (!block) return;
+
+    // toggle a class
+    block.classList.toggle('is-open');
+  });
+</script>
+
+
+<body>
+<!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-left">
+        <img src="images/Chicagoapple.JPG" alt="Profile" class="profile-pic">
+        <span class="brand-name">Tim Hsu</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">CS Projects</a></li>
+        <li><a href="research.html">CS Research</a></li>
+        <li><a href="travelgallery.html">Travel Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- NEW: Full-screen Intro -->
+  <section class="intro">
+    <h1 class="intro-title">Hi, this is Tim’s Tab.</h1>
+    <img src="images/Tim_DreamWorks.PNG" alt="Tim selfie" class="intro-selfie">
+  </section>
+
+  <!-- Hero Section (existing content starts below intro) -->
+  <section class="hero">
+    <div class="hero-text">
+      <!-- CURRENT block (collapsed by default; expands on hover/click) -->
+        <section class="reveal-block current">
+            <div class="block-face">CURRENT</div>
+            <div class="block-content">
+                <div class="current-location">
+                    <img src="images/placeholder.png" alt="Location Icon" class="current-icon">
+                    <span>Columbus, OH</span>
+                </div>
+                <div class="current-row">
+                    <div class="current-item">
+                        <img src="images/computer-science.png" alt="Computer Science Icon" class="current-icon">
+                        <span>Computer Science</span>
+                    </div>
+                    <div class="current-item">
+                        <img src="images/cube.png" alt="Math Icon" class="current-icon">
+                        <span>Math</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+      <!-- ABOUT ME block -->
+        <section class="reveal-block" id="about">
+        <!-- Face shown by default -->
+        <div class="block-face">ABOUT ME</div>
+
+         <!-- Hidden content that pops in on hover/focus -->
+        <div class="block-content">
+            <p>
+            Studying computer science at The Ohio State University.
+            Love travel, sports, music, cityscape photography, foods.
+            </p>
+
+            <div class="school-entry">
+                <img src="images/hchs.png" alt="National Hsinchu Senior High School Logo" class="school-icon">
+                <span class="school-name">National Hsinchu Senior High School 2021 – 2024</span>
+            </div>
+
+            <div class="school-entry">
+                <img src="images/osu.png" alt="Ohio State University Logo" class="school-icon">
+                <span class="school-name">The Ohio State University 2024 – Present</span>
+            </div>
+        </div>
+      </section>
+
+      <!-- Contact block -->
+      <div class="reveal-block contact">
+        <div class="block-face">CONTACT</div>
+        <div class="block-content">
+            <!-- LinkedIn -->
+            <div class="contact-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" 
+                    alt="LinkedIn" 
+                    class="contact-icon">
+                <a href="https://www.linkedin.com/in/tingwei-tim-hsu" target="_blank" class="contact-linkedin">LinkedIn</a>
+            </div>
+            <!-- GitHub -->
+            <div class="contact-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" 
+                    alt="GitHub" 
+                    class="contact-icon">
+                <a href="https://github.com/Ting-WeiTimHsu" target="_blank" class="contact-github">GitHub</a>
+            </div>
+            <!-- Gmail -->
+            <div class="contact-item">
+                <img src="images/gmail.png" 
+                    alt="Gmail" 
+                    class="contact-icon">
+                <span class="contact-gmail">tingweihsu.0131@gmail.com</span>
+            </div>
+        </div>
+      </div>
+    </div> <!-- ✅ close .hero-text -->
+  </section>
+
+  <!-- Footer with attribution -->
+    <footer class="footer">
+    <div class="attributions">
+        <p><a href="https://www.flaticon.com" title="icons">Multiple icons created by Freepik - Flaticon</a></p>
+    </div>
+    </footer>
+</body>
+</html>
