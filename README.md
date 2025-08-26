@@ -1,7 +1,7 @@
 # Hi, this is Tim's Tab
 
-Welcome to **Tim's Tab Personal Website** 🎉  
-This project is a personal portfolio built with **HTML, CSS, and JavaScript** to showcase projects, travel gallery, and interactive features.
+Welcome to **this is Tim's Tab Personal Website** 🎉  
+This project is a personal portfolio built with **HTML, CSS, and JavaScript** to showcase projects & research, travel gallery, and interactive features.
 
 ---
 
@@ -50,3 +50,4 @@ Hosted with **GitHub Pages**:
 - 📧 **tingweihsu.0131@gmail.com**
 
 ---
+
